@@ -1,0 +1,136 @@
+{
+  "categories": [
+    "Motivation",
+    "Technology",
+    "Future Scope",
+    "Intern"
+  ],
+  "videos": [
+    {
+      "id": 1782388320800,
+      "title": "Lecture Clip (0s - 0s)",
+      "category": "Technology",
+      "videoPath": "/videos/vid_1782388320800.mp4",
+      "thumbnailPath": "",
+      "clips": [
+        {
+          "label": "Saved Segment",
+          "start": "0",
+          "end": "0"
+        }
+      ]
+    },
+    {
+      "id": 1782388350782,
+      "title": "Lecture Clip (3s - 5s)",
+      "category": "Technology",
+      "videoPath": "/videos/vid_1782388350782.mp4",
+      "thumbnailPath": "",
+      "clips": [
+        {
+          "label": "Saved Segment",
+          "start": "3",
+          "end": "5"
+        }
+      ]
+    },
+    {
+      "id": 1782388510658,
+      "title": "Lecture Clip (2s - 5s)",
+      "category": "Technology",
+      "videoPath": "/videos/vid_1782388510658.mp4",
+      "thumbnailPath": "",
+      "clips": [
+        {
+          "label": "Saved Segment",
+          "start": "2",
+          "end": "5"
+        }
+      ]
+    },
+    {
+      "id": 1782398827826,
+      "title": "Lecture Clip (0s - 0s)",
+      "category": "Technology",
+      "videoPath": "/videos/vid_1782398827826.mp4",
+      "thumbnailPath": "",
+      "clips": [
+        {
+          "label": "Saved Segment",
+          "start": "0",
+          "end": "0"
+        }
+      ]
+    },
+    {
+      "id": 1782400495649,
+      "title": "Lecture Clip (0s - 0s)",
+      "category": "Technology",
+      "videoPath": "/videos/vid_1782400495649.mp4",
+      "thumbnailPath": "",
+      "clips": [
+        {
+          "label": "Saved Segment",
+          "start": "0",
+          "end": "0"
+        }
+      ]
+    },
+    {
+      "id": 1782400654134,
+      "title": "Lecture Clip (0s - 0s)",
+      "category": "Technology",
+      "videoPath": "/videos/vid_1782400654134.mp4",
+      "thumbnailPath": "",
+      "clips": [
+        {
+          "label": "Saved Segment",
+          "start": "0",
+          "end": "0"
+        }
+      ]
+    },
+    {
+      "id": 1782400710567,
+      "title": "Lecture Clip (0s - 7s)",
+      "category": "Technology",
+      "videoPath": "/videos/vid_1782400710567.mp4",
+      "thumbnailPath": "",
+      "clips": [
+        {
+          "label": "Saved Segment",
+          "start": "0",
+          "end": "7"
+        }
+      ]
+    },
+    {
+      "id": 1782401450744,
+      "title": "Lecture Clip (70s - 82s)",
+      "category": "Motivation",
+      "videoPath": "/videos/vid_1782401450744.mp4",
+      "thumbnailPath": "",
+      "clips": [
+        {
+          "label": "Saved Segment",
+          "start": "70",
+          "end": "82"
+        }
+      ]
+    },
+    {
+      "id": 1782401447105,
+      "title": "Lecture Clip (70s - 82s)",
+      "category": "Technology",
+      "videoPath": "/videos/vid_1782401447105.mp4",
+      "thumbnailPath": "",
+      "clips": [
+        {
+          "label": "Saved Segment",
+          "start": "70",
+          "end": "82"
+        }
+      ]
+    }
+  ]
+}

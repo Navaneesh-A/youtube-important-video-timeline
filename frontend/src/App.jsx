@@ -75,12 +75,12 @@ function App() {
   return (
     <div style={{ padding: '24px', fontFamily: 'sans-serif', backgroundColor: '#0f0f0f', color: '#fff', minHeight: '100vh' }}>
       <header style={{ marginBottom: '32px', borderBottom: '1px solid #333', paddingBottom: '16px' }}>
-        <h2>📺 Workspace Vault Studio</h2>
+        <h2>📺 Youtube Save Video</h2>
       </header>
 
       {/* SECTION A: SAVE & LOGGER WORKBENCH */}
       <section style={{ background: '#212121', padding: '20px', borderRadius: '8px', marginBottom: '40px' }}>
-        <h3>Clip New Lecture Video</h3>
+        <h3>Add New Lecture Video</h3>
         <div style={{ display: 'flex', gap: '12px', marginBottom: '16px' }}>
           <input
             type="text"
@@ -100,8 +100,15 @@ function App() {
 
         {url && (
           <div style={{ marginTop: '16px' }}>
+            {/* FIXED: Using ReactPlayer for online streaming link preview */}
             <div style={{ maxWidth: '480px', borderRadius: '8px', overflow: 'hidden' }}>
-              <ReactPlayer ref={playerRef} url={url} controls width="100%" height="270px" />
+              <ReactPlayer
+                ref={playerRef}
+                url={url}
+                controls
+                width="100%"
+                height="270px"
+              />
             </div>
 
             <div style={{ display: 'flex', gap: '20px', margin: '16px 0' }}>
@@ -111,11 +118,11 @@ function App() {
                   type="number"
                   value={startTime}
                   onChange={(e) => setStartTime(Number(e.target.value))}
-                  style={{ width: '70px', padding: '4px', marginLeft: '6px' }}
+                  style={{ width: '70px', padding: '4px', marginLeft: '6px', color: '#000' }}
                 />s
                 <button
                   onClick={() => setStartTime(Math.floor(playerRef.current.getCurrentTime()))}
-                  style={{ marginLeft: '8px', padding: '4px 8px', cursor: 'pointer' }}
+                  style={{ marginLeft: '8px', padding: '4px 8px', cursor: 'pointer', color: '#000' }}
                 >Use Current Time</button>
               </div>
               <div>
@@ -124,11 +131,11 @@ function App() {
                   type="number"
                   value={endTime}
                   onChange={(e) => setEndTime(Number(e.target.value))}
-                  style={{ width: '70px', padding: '4px', marginLeft: '6px' }}
+                  style={{ width: '70px', padding: '4px', marginLeft: '6px', color: '#000' }}
                 />s
                 <button
                   onClick={() => setEndTime(Math.floor(playerRef.current.getCurrentTime()))}
-                  style={{ marginLeft: '8px', padding: '4px 8px', cursor: 'pointer' }}
+                  style={{ marginLeft: '8px', padding: '4px 8px', cursor: 'pointer', color: '#000' }}
                 >Use Current Time</button>
               </div>
             </div>
