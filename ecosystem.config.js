@@ -2,7 +2,9 @@ module.exports = {
   apps: [
     {
       name: "node-backend",
-      script: "./backend/server.js",       // Path to your Node entry point
+      script: "./server.js",
+      cwd: "./backend",
+      watch: false,
       env: {
         NODE_ENV: "production",
         PORT: 5001
@@ -10,11 +12,13 @@ module.exports = {
     },
     {
       name: "react-frontend",
-      script: "node_modules/react-scripts/bin/react-scripts.js",
-      args: "start",
+      script: "./node_modules/vite/bin/vite.js",
+      args: "dev", // FIXED: Changed 'run dev' to 'dev' for direct binary execution
+      cwd: "./frontend",
+      watch: false,
       env: {
-        PORT: 5173                         // Port for React local server
+        PORT: 5173
       }
     }
   ]
-}
+};

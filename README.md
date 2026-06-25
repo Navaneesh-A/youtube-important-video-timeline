@@ -1,3 +1,8 @@
+# run using pm2
+
+pm2 restart ecosystem.config.js --only react-frontend
+
+
 # youtube-important-video-timeline
 only saving important parts in a video and not full
 📺 Workspace Vault Studio (YouTube Timestamp Saver)
