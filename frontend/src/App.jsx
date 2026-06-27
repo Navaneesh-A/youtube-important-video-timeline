@@ -7,7 +7,6 @@ function App() {
   const [category, setCategory] = useState('Technology')
   const [startTime, setStartTime] = useState(0)
   const [endTime, setEndTime] = useState(0)
-
   // App & Download status states
   const [progress, setProgress] = useState(0)
   const [status, setStatus] = useState('')
@@ -17,7 +16,8 @@ function App() {
   const [categories, setCategories] = useState(["Motivation", "Technology", "Future Scope", "Intern"])
   const [savedVideos, setSavedVideos] = useState([])
 
-  const playerRef = useRef(null)
+  // removed cause dint work with react video player
+  //const playerRef = useRef(null)
 
   // Fetch saved video inventory on component mount
   useEffect(() => {
@@ -71,7 +71,35 @@ function App() {
       eventSource.close()
     };
   }
+  // convert seconds to 2:10
+  const formatTimeDisplay = (secs) => {
+    const h = Math.floor(secs / 3600);
+    const m = Math.floor((secs % 3600) / 60);
+    const s = secs % 60;
 
+    const paddedS = s < 10 ? `0${s}` : s;
+    if (h > 0) {
+      return `${h}:${m < 10 ? `0${m}` : m}:${paddedS}`;
+    }
+    return `${m}:${paddedS}`;
+  };
+
+
+  // Helper to turn HH:MM:SS, MM:SS, or SS into pure seconds
+  const convertToSeconds = (timeStr) => {
+    if (typeof timeStr === 'number') return timeStr;
+    const parts = timeStr.split(':').map(num => parseInt(num, 10) || 0);
+
+    if (parts.length === 3) {
+      // HH:MM:SS format
+      return parts[0] * 3600 + parts[1] * 60 + parts[2];
+    }
+    if (parts.length === 2) {
+      // MM:SS format
+      return parts[0] * 60 + parts[1];
+    }
+    return parts[0] || 0;
+  };
   return (
     <div style={{ padding: '24px', fontFamily: 'sans-serif', backgroundColor: '#0f0f0f', color: '#fff', minHeight: '100vh' }}>
       <header style={{ marginBottom: '32px', borderBottom: '1px solid #333', paddingBottom: '16px' }}>
@@ -100,43 +128,45 @@ function App() {
 
         {url && (
           <div style={{ marginTop: '16px' }}>
-            {/* FIXED: Using ReactPlayer for online streaming link preview */}
-            <div style={{ maxWidth: '480px', borderRadius: '8px', overflow: 'hidden' }}>
-              <ReactPlayer
-                ref={playerRef}
-                url={url}
-                controls
-                width="100%"
-                height="270px"
-              />
-            </div>
 
-            <div style={{ display: 'flex', gap: '20px', margin: '16px 0' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', margin: '24px 0', padding: '20px', background: '#1a1a1a', borderRadius: '8px' }}>
+              <h4 style={{ margin: '0 0 10px 0', color: '#aaa', fontSize: '14px' }}>Adjust Timeline Progress Windows</h4>
+
+              {/* Start Handle Slider */}
               <div>
-                <label>Start Window: </label>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px', fontSize: '14px' }}>
+                  <span style={{ color: '#888' }}>Start Marker:</span>
+                  <span style={{ fontWeight: 'bold', color: '#fff' }}>
+                    {/* Formats seconds to HH:MM:SS on the fly */}
+                    {new Date(startTime * 1000).toISOString().substring(11, 19)} ({startTime}s)
+                  </span>
+                </div>
                 <input
-                  type="number"
+                  type="range"
+                  min="0"
+                  max="3600" // Adjust to your average lecture duration (e.g., 3600 = 1 hour)
                   value={startTime}
                   onChange={(e) => setStartTime(Number(e.target.value))}
-                  style={{ width: '70px', padding: '4px', marginLeft: '6px', color: '#000' }}
-                />s
-                <button
-                  onClick={() => setStartTime(Math.floor(playerRef.current.getCurrentTime()))}
-                  style={{ marginLeft: '8px', padding: '4px 8px', cursor: 'pointer', color: '#000' }}
-                >Use Current Time</button>
+                  style={{ width: '100%', cursor: 'pointer', accentColor: '#ff0000' }}
+                />
               </div>
+
+              {/* End Handle Slider */}
               <div>
-                <label>End Window: </label>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px', fontSize: '14px' }}>
+                  <span style={{ color: '#888' }}>End Marker:</span>
+                  <span style={{ fontWeight: 'bold', color: '#fff' }}>
+                    {new Date(endTime * 1000).toISOString().substring(11, 19)} ({endTime}s)
+                  </span>
+                </div>
                 <input
-                  type="number"
+                  type="range"
+                  min="0"
+                  max="3600"
                   value={endTime}
                   onChange={(e) => setEndTime(Number(e.target.value))}
-                  style={{ width: '70px', padding: '4px', marginLeft: '6px', color: '#000' }}
-                />s
-                <button
-                  onClick={() => setEndTime(Math.floor(playerRef.current.getCurrentTime()))}
-                  style={{ marginLeft: '8px', padding: '4px 8px', cursor: 'pointer', color: '#000' }}
-                >Use Current Time</button>
+                  style={{ width: '100%', cursor: 'pointer', accentColor: '#ff0000' }}
+                />
               </div>
             </div>
 
@@ -181,7 +211,7 @@ function App() {
 
         {/* Dynamic Media Video Card Grid Display */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '20px' }}>
-          {savedVideos.filter(v => v.category === activeTab).map(video => (
+          {savedVideos.filter(v => v.category === activeTab).slice().reverse().map(video => (
             <div key={video.id} style={{ background: '#1c1c1c', borderRadius: '8px', overflow: 'hidden' }}>
               {/* Native HTML5 video component streaming from backend public asset folder */}
               <video
@@ -190,11 +220,29 @@ function App() {
                 poster={video.thumbnailPath}
                 style={{ width: '100%', aspectRatio: '16/9', background: '#000' }}
               />
+              {/* PASTE THIS INSTEAD: */}
               <div style={{ padding: '12px' }}>
-                <h4 style={{ margin: '0 0 8px 0', fontSize: '15px', lineInterspace: '1.4' }}>{video.title}</h4>
-                <p style={{ margin: 0, fontSize: '12px', color: '#aaa' }}>
-                  Clip Window: {video.clips[0].start}s - {video.clips[0].end}s
-                </p>
+                <h4 style={{ margin: '0 0 8px 0', fontSize: '15px', lineHeight: '1.4', color: '#fff' }}>
+                  {video.title}
+                </h4>
+
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '12px' }}>
+                  <p style={{ margin: 0, fontSize: '13px', color: '#aaa', fontWeight: '500' }}>
+                    Clip Window: ({formatTimeDisplay(video.clips[0].start)} - {formatTimeDisplay(video.clips[0].end)})
+                  </p>
+
+                  {video.url && (
+                    <a
+                      href={video.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ textDecoration: 'none', fontSize: '16px', cursor: 'pointer' }}
+                      title="Open YouTube source"
+                    >
+                      🔺📺
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
           ))}

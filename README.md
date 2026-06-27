@@ -2,6 +2,10 @@
 
 pm2 restart ecosystem.config.js --only react-frontend
 
+# ecosystem.config.js
+name: "react-frontend",
+      // Point directly to the vite binary in node_modules
+
 
 # youtube-important-video-timeline
 only saving important parts in a video and not full
@@ -25,7 +29,6 @@ Make sure you have Node.js installed, along with yt-dlp and ffmpeg configured on
 PowerShell
 # Navigate to the backend workspace
 cd backend
-
 # Install production dependencies
 npm install
 

@@ -1,5 +1,5 @@
 const express = require('express');
-const { spawn } = require('child_process');
+const { spawn, execFile } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 const app = express();
@@ -31,54 +31,79 @@ app.get('/api/download-progress', (req, res) => {
   const videoId = Date.now();
   const videoFileName = `vid_${videoId}.mp4`;
   const outputPath = path.join(__dirname, 'public/videos', videoFileName);
+  const ytdlpPath = 'C:\\Users\\Admin\\Desktop\\ytdownload\\yt-dlp.exe';
 
-  // Command to download only the specified chunk using yt-dlp + ffmpeg
-  // Change 'yt-dlp' to the exact absolute path where you saved it
-  const ytdlp = spawn('C:\\Users\\Admin\\Desktop\\ytdownload\\yt-dlp.exe', [
-    url,
-    '--ffmpeg-location', 'C:\\Users\\Admin\\Desktop\\ytdownload',
-    '--download-sections', `*${startTime}-${endTime}`,
-    '-o', outputPath,
-    '-f', 'mp4'
-  ]);
+  let videoTitle = `Lecture Clip (${startTime}s - ${endTime}s)`;
+  let videoThumbnail = '';
 
-  // CRITICAL: Catch process launch errors so the server doesn't crash
-  ytdlp.on('error', (err) => {
-    console.error("Failed to start yt-dlp process:", err);
-    res.write(`data: ${JSON.stringify({ error: 'System configuration error with download tools.' })}\n\n`);
-    res.end();
-  });
-  // "C:\Users\Admin\Downloads\yt download\ffmpeg-8.1.2.tar.xz"
-  ytdlp.stdout.on('data', (data) => {
-    const output = data.toString();
-    const match = output.match(/(\d+\.\d+)%/);
-    if (match) {
-      res.write(`data: ${JSON.stringify({ progress: match[1] })}\n\n`);
+  setStatusMessage('Fetching live video metadata details...');
+
+  // Step A: Extract live Title and Thumbnail URL asynchronously from YouTube
+  execFile(ytdlpPath, [url, '--dump-json'], (error, stdout) => {
+    if (!error && stdout) {
+      try {
+        const metadata = JSON.parse(stdout);
+        videoTitle = metadata.title || videoTitle;
+        videoThumbnail = metadata.thumbnail || '';
+      } catch (e) {
+        console.error("Failed to parse metadata JSON stream:", e);
+      }
     }
+
+    // Step B: Proceed to download section segments
+    startDownloadPipeline();
   });
 
-  ytdlp.on('close', (code) => {
-    if (code === 0) {
-      // Update videos.json database on successful download
-      const jsonPath = path.join(__dirname, 'videos.json');
-      const db = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+  function setStatusMessage(msg) {
+    res.write(`data: ${JSON.stringify({ progress: '0', status: msg })}\n\n`);
+  }
 
-      db.videos.push({
-        id: videoId,
-        title: `Lecture Clip (${startTime}s - ${endTime}s)`,
-        category: category || "Technology",
-        videoPath: `/videos/${videoFileName}`,
-        thumbnailPath: "", // Can extend later to fetch real thumbnails
-        clips: [{ label: "Saved Segment", start: startTime, end: endTime }]
-      });
+  function startDownloadPipeline() {
+    const ytdlp = spawn(ytdlpPath, [
+      url,
+      '--ffmpeg-location', 'C:\\Users\\Admin\\Desktop\\ytdownload',
+      '--download-sections', `*${startTime}-${endTime}`,
+      '-o', outputPath,
+      '-f', 'mp4'
+    ]);
 
-      fs.writeFileSync(jsonPath, JSON.stringify(db, null, 2));
-      res.write(`data: ${JSON.stringify({ status: 'complete' })}\n\n`);
-    } else {
-      res.write(`data: ${JSON.stringify({ error: 'yt-dlp execution failed' })}\n\n`);
-    }
-    res.end();
-  });
+    ytdlp.on('error', (err) => {
+      console.error("Failed to start yt-dlp process:", err);
+      res.write(`data: ${JSON.stringify({ error: 'System configuration error with download tools.' })}\n\n`);
+      res.end();
+    });
+
+    ytdlp.stdout.on('data', (data) => {
+      const output = data.toString();
+      const match = output.match(/(\d+\.\d+)%/);
+      if (match) {
+        res.write(`data: ${JSON.stringify({ progress: match[1] })}\n\n`);
+      }
+    });
+
+    ytdlp.on('close', (code) => {
+      if (code === 0) {
+        const jsonPath = path.join(__dirname, 'videos.json');
+        const db = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+
+        db.videos.push({
+          id: videoId,
+          title: videoTitle,
+          category: category || "Technology",
+          videoPath: `/videos/${videoFileName}`,
+          thumbnailPath: videoThumbnail, // Saves direct cover thumbnail link
+          url: url, // Passed to frontend link icon routing
+          clips: [{ label: "Saved Segment", start: startTime, end: endTime }]
+        });
+
+        fs.writeFileSync(jsonPath, JSON.stringify(db, null, 2));
+        res.write(`data: ${JSON.stringify({ status: 'complete' })}\n\n`);
+      } else {
+        res.write(`data: ${JSON.stringify({ error: 'yt-dlp execution failed' })}\n\n`);
+      }
+      res.end();
+    });
+  }
 });
 
 const PORT = 5001;

@@ -144,3 +144,20 @@ vite.config.ts.timestamp-*
 
 backend/public/videos/
 backend/public/Videos/
+# Node Dependencies (Crucial - never push these)
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+
+# Local Environment Secrets
+.env
+.env.local
+
+# Build Production Outputs
+dist/
+build/
+
+# IDE and System Files
+.vscode/
+.DS_Store
+Thumbs.db

@@ -7,48 +7,6 @@
   ],
   "videos": [
     {
-      "id": 1782388320800,
-      "title": "Lecture Clip (0s - 0s)",
-      "category": "Technology",
-      "videoPath": "/videos/vid_1782388320800.mp4",
-      "thumbnailPath": "",
-      "clips": [
-        {
-          "label": "Saved Segment",
-          "start": "0",
-          "end": "0"
-        }
-      ]
-    },
-    {
-      "id": 1782388350782,
-      "title": "Lecture Clip (3s - 5s)",
-      "category": "Technology",
-      "videoPath": "/videos/vid_1782388350782.mp4",
-      "thumbnailPath": "",
-      "clips": [
-        {
-          "label": "Saved Segment",
-          "start": "3",
-          "end": "5"
-        }
-      ]
-    },
-    {
-      "id": 1782388510658,
-      "title": "Lecture Clip (2s - 5s)",
-      "category": "Technology",
-      "videoPath": "/videos/vid_1782388510658.mp4",
-      "thumbnailPath": "",
-      "clips": [
-        {
-          "label": "Saved Segment",
-          "start": "2",
-          "end": "5"
-        }
-      ]
-    },
-    {
       "id": 1782398827826,
       "title": "Lecture Clip (0s - 0s)",
       "category": "Technology",
@@ -129,6 +87,218 @@
           "label": "Saved Segment",
           "start": "70",
           "end": "82"
+        }
+      ]
+    },
+    {
+      "id": 1782403951910,
+      "title": "Lecture Clip (0s - 17s)",
+      "category": "Technology",
+      "videoPath": "/videos/vid_1782403951910.mp4",
+      "thumbnailPath": "",
+      "clips": [
+        {
+          "label": "Saved Segment",
+          "start": "0",
+          "end": "17"
+        }
+      ]
+    },
+    {
+      "id": 1782404042945,
+      "title": "Lecture Clip (0s - 14s)",
+      "category": "Motivation",
+      "videoPath": "/videos/vid_1782404042945.mp4",
+      "thumbnailPath": "",
+      "clips": [
+        {
+          "label": "Saved Segment",
+          "start": "0",
+          "end": "14"
+        }
+      ]
+    },
+    {
+      "id": 1782404460428,
+      "title": "Lecture Clip (10s - 15s)",
+      "category": "Motivation",
+      "videoPath": "/videos/vid_1782404460428.mp4",
+      "thumbnailPath": "",
+      "clips": [
+        {
+          "label": "Saved Segment",
+          "start": "10",
+          "end": "15"
+        }
+      ]
+    },
+    {
+      "id": 1782405845675,
+      "title": "Lecture Clip (0s - 243s)",
+      "category": "Motivation",
+      "videoPath": "/videos/vid_1782405845675.mp4",
+      "thumbnailPath": "",
+      "clips": [
+        {
+          "label": "Saved Segment",
+          "start": "0",
+          "end": "243"
+        }
+      ]
+    },
+    {
+      "id": 1782406260418,
+      "title": "Lecture Clip (0s - 159s)",
+      "category": "Motivation",
+      "videoPath": "/videos/vid_1782406260418.mp4",
+      "thumbnailPath": "",
+      "clips": [
+        {
+          "label": "Saved Segment",
+          "start": "0",
+          "end": "159"
+        }
+      ]
+    },
+    {
+      "id": 1782407441765,
+      "title": "Lecture Clip (0s - 284s)",
+      "category": "Technology",
+      "videoPath": "/videos/vid_1782407441765.mp4",
+      "thumbnailPath": "",
+      "clips": [
+        {
+          "label": "Saved Segment",
+          "start": "0",
+          "end": "284"
+        }
+      ]
+    },
+    {
+      "id": 1782471501280,
+      "title": "Lecture Clip (0s - 12s)",
+      "category": "Technology",
+      "videoPath": "/videos/vid_1782471501280.mp4",
+      "thumbnailPath": "",
+      "clips": [
+        {
+          "label": "Saved Segment",
+          "start": "0",
+          "end": "12"
+        }
+      ]
+    },
+    {
+      "id": 1782551020119,
+      "title": "Lecture Clip (0s - 0s)",
+      "category": "Technology",
+      "videoPath": "/videos/vid_1782551020119.mp4",
+      "thumbnailPath": "",
+      "clips": [
+        {
+          "label": "Saved Segment",
+          "start": "0",
+          "end": "0"
+        }
+      ]
+    },
+    {
+      "id": 1782551059114,
+      "title": "Lecture Clip (0s - 0s)",
+      "category": "Technology",
+      "videoPath": "/videos/vid_1782551059114.mp4",
+      "thumbnailPath": "",
+      "clips": [
+        {
+          "label": "Saved Segment",
+          "start": "0",
+          "end": "0"
+        }
+      ]
+    },
+    {
+      "id": 1782551654685,
+      "title": "Lecture Clip (0s - 0s)",
+      "category": "Technology",
+      "videoPath": "/videos/vid_1782551654685.mp4",
+      "thumbnailPath": "",
+      "clips": [
+        {
+          "label": "Saved Segment",
+          "start": "0",
+          "end": "0"
+        }
+      ]
+    },
+    {
+      "id": 1782553481027,
+      "title": "Lecture Clip (0:2:5s - 0:3:6s)",
+      "category": "Technology",
+      "videoPath": "/videos/vid_1782553481027.mp4",
+      "thumbnailPath": "",
+      "clips": [
+        {
+          "label": "Saved Segment",
+          "start": "0:2:5",
+          "end": "0:3:6"
+        }
+      ]
+    },
+    {
+      "id": 1782553658254,
+      "title": "Lecture Clip (510s - 1296s)",
+      "category": "Technology",
+      "videoPath": "/videos/vid_1782553658254.mp4",
+      "thumbnailPath": "",
+      "clips": [
+        {
+          "label": "Saved Segment",
+          "start": "510",
+          "end": "1296"
+        }
+      ]
+    },
+    {
+      "id": 1782562470505,
+      "title": "Lecture Clip (302s - 660s)",
+      "category": "Technology",
+      "videoPath": "/videos/vid_1782562470505.mp4",
+      "thumbnailPath": "",
+      "clips": [
+        {
+          "label": "Saved Segment",
+          "start": "302",
+          "end": "660"
+        }
+      ]
+    },
+    {
+      "id": 1782562779673,
+      "title": "The Strange Math That Predicts (Almost) Anything",
+      "category": "Technology",
+      "videoPath": "/videos/vid_1782562779673.mp4",
+      "thumbnailPath": "https://i.ytimg.com/vi/KZeIEiBrT_w/maxresdefault.jpg",
+      "url": "https://youtu.be/KZeIEiBrT_w?si=oiXs1ho3I2gWCL8X",
+      "clips": [
+        {
+          "label": "Saved Segment",
+          "start": "302",
+          "end": "546"
+        }
+      ]
+    },
+    {
+      "id": 1782562810200,
+      "title": "The Strange Math That Predicts (Almost) Anything",
+      "category": "Technology",
+      "videoPath": "/videos/vid_1782562810200.mp4",
+      "thumbnailPath": "https://i.ytimg.com/vi/KZeIEiBrT_w/maxresdefault.jpg",
+      "url": "https://youtu.be/KZeIEiBrT_w?si=oiXs1ho3I2gWCL8X",
+      "clips": [
+        {
+          "label": "Saved Segment",
+          "start": "302",
+          "end": "374"
         }
       ]
     }
