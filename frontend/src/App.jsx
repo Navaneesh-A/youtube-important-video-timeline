@@ -19,6 +19,10 @@ function App() {
   // removed cause dint work with react video player
   //const playerRef = useRef(null)
 
+  // notes adding
+  const [note, setNote] = useState('');
+  const [hoveredVideoId, setHoveredVideoId] = useState(null);
+
   // Fetch saved video inventory on component mount
   useEffect(() => {
     fetchSavedData()
@@ -39,11 +43,11 @@ function App() {
     if (!url) return alert('Please enter a YouTube link first!')
     setStatus('Initializing clip download thread...')
     setProgress(1)
-
-    // Construct local relative path mapped via Vite Proxy setup
+    // getting the notes
     const eventSource = new EventSource(
-      `/api/download-progress?url=${encodeURIComponent(url)}&startTime=${startTime}&endTime=${endTime}&category=${category}`
+      `/api/download-progress?url=${encodeURIComponent(url)}&startTime=${startTime}&endTime=${endTime}&category=${category}&note=${encodeURIComponent(note)}`
     );
+
 
     eventSource.onmessage = (event) => {
       const data = JSON.parse(event.data)
@@ -56,8 +60,9 @@ function App() {
       if (data.status === 'complete') {
         setStatus('Saved securely offline!')
         setProgress(100)
+        setNote('') // Clear note input state box automatically
         eventSource.close()
-        fetchSavedData() // Reload media grid instantly
+        fetchSavedData()
       }
 
       if (data.error) {
@@ -169,7 +174,19 @@ function App() {
                 />
               </div>
             </div>
-
+            {/* Put this inside your {url && ( ... )} wrapper right above the download button */}
+            <div style={{ marginBottom: '20px' }}>
+              <label style={{ display: 'block', marginBottom: '6px', fontSize: '13px', color: '#aaa' }}>
+                Add Optional Note (Replaces text on hover):
+              </label>
+              <input
+                type="text"
+                placeholder="Type a quick note or reference anchor..."
+                value={note}
+                onChange={(e) => setNote(e.target.value)}
+                style={{ width: '100%', boxSizing: 'border-box', padding: '10px', borderRadius: '4px', border: 'none', background: '#3a3a3a', color: '#fff' }}
+              />
+            </div>
             <button
               onClick={triggerDownload}
               style={{ background: '#cc0000', color: '#fff', border: 'none', padding: '12px 24px', borderRadius: '20px', fontWeight: 'bold', cursor: 'pointer' }}
@@ -221,28 +238,41 @@ function App() {
                 style={{ width: '100%', aspectRatio: '16/9', background: '#000' }}
               />
               {/* PASTE THIS INSTEAD: */}
-              <div style={{ padding: '12px' }}>
-                <h4 style={{ margin: '0 0 8px 0', fontSize: '15px', lineHeight: '1.4', color: '#fff' }}>
-                  {video.title}
-                </h4>
+              <div
+                style={{ padding: '12px', minHeight: '80px', position: 'relative' }}
+                onMouseEnter={() => setHoveredVideoId(video.id)}
+                onMouseLeave={() => setHoveredVideoId(null)}
+              >
+                {hoveredVideoId === video.id && video.note ? (
+                  /* Hover Active View: Shows ONLY the custom note text */
+                  <div style={{ color: '#ffc107', fontSize: '14px', lineHeight: '1.4', fontWeight: '500', fontStyle: 'italic' }}>
+                    📝 {video.note}
+                  </div>
+                ) : (
+                  /* Default Steady State View: Shows Title, Window, and Link Icon */
+                  <>
+                    <h4 style={{ margin: '0 0 8px 0', fontSize: '15px', lineHeight: '1.4', color: '#fff' }}>
+                      {video.title}
+                    </h4>
 
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '12px' }}>
-                  <p style={{ margin: 0, fontSize: '13px', color: '#aaa', fontWeight: '500' }}>
-                    Clip Window: ({formatTimeDisplay(video.clips[0].start)} - {formatTimeDisplay(video.clips[0].end)})
-                  </p>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '12px' }}>
+                      <p style={{ margin: 0, fontSize: '13px', color: '#aaa', fontWeight: '500' }}>
+                        Clip Window: ({formatTimeDisplay(video.clips[0].start)} - {formatTimeDisplay(video.clips[0].end)})
+                      </p>
 
-                  {video.url && (
-                    <a
-                      href={video.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ textDecoration: 'none', fontSize: '16px', cursor: 'pointer' }}
-                      title="Open YouTube source"
-                    >
-                      🔺📺
-                    </a>
-                  )}
-                </div>
+                      {video.url && (
+                        <a
+                          href={video.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{ textDecoration: 'none', fontSize: '16px', cursor: 'pointer' }}
+                        >
+                          🔺📺
+                        </a>
+                      )}
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           ))}

@@ -90,6 +90,7 @@ app.get('/api/download-progress', (req, res) => {
           id: videoId,
           title: videoTitle,
           category: category || "Technology",
+          note: req.query.note || "",
           videoPath: `/videos/${videoFileName}`,
           thumbnailPath: videoThumbnail, // Saves direct cover thumbnail link
           url: url, // Passed to frontend link icon routing
