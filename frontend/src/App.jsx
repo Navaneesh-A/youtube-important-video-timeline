@@ -15,7 +15,8 @@ function App() {
   // Data models loaded from server
   const [categories, setCategories] = useState(["Motivation", "Technology", "Future Scope", "Intern"])
   const [savedVideos, setSavedVideos] = useState([])
-
+  // new category + button
+  const [newCategoryInput, setNewCategoryInput] = useState(false);
   // removed cause dint work with react video player
   //const playerRef = useRef(null)
 
@@ -129,6 +130,46 @@ function App() {
           >
             {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
           </select>
+        </div>
+        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            style={{ padding: '10px', borderRadius: '4px', background: '#3a3a3a', color: '#fff', border: 'none' }}
+          >
+            {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
+          </select>
+
+          <button
+            type="button"
+            onClick={async () => {
+              const newCat = prompt("Enter new category name:");
+              if (!newCat) return;
+              const trimmed = newCat.trim();
+              if (trimmed && !categories.includes(trimmed)) {
+                // Optimistically add to frontend local state UI arrays instantly
+                const updatedCats = [...categories, trimmed];
+                setCategories(updatedCats);
+                setCategory(trimmed);
+                setActiveTab(trimmed);
+
+                // Commit persistently to videos.json database on the backend cluster
+                try {
+                  await fetch('/api/add-category', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ category: trimmed })
+                  });
+                } catch (err) {
+                  console.error("Failed to sync new category metadata down to server:", err);
+                }
+              }
+            }}
+            style={{ padding: '10px 14px', borderRadius: '4px', background: '#333', color: '#ffc107', border: '1px dashed #ffc107', fontWeight: 'bold', cursor: 'pointer' }}
+            title="Create custom category folder"
+          >
+            +
+          </button>
         </div>
 
         {url && (

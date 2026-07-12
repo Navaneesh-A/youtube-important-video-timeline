@@ -3,7 +3,8 @@
     "Motivation",
     "Technology",
     "Future Scope",
-    "Intern"
+    "Intern",
+    "leetcode"
   ],
   "videos": [
     {
@@ -651,6 +652,22 @@
           "label": "Saved Segment",
           "start": "0",
           "end": "0"
+        }
+      ]
+    },
+    {
+      "id": 1783856029852,
+      "title": "Set Matrix Zeroes | O(1) Space Approach | Brute - Better - Optimal",
+      "category": "leetcode",
+      "note": "matrix - optimal approach ",
+      "videoPath": "/videos/vid_1783856029852.mp4",
+      "thumbnailPath": "https://i.ytimg.com/vi/N0MgLvceX7M/maxresdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=N0MgLvceX7M",
+      "clips": [
+        {
+          "label": "Saved Segment",
+          "start": "962",
+          "end": "994"
         }
       ]
     }

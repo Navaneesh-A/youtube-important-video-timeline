@@ -106,7 +106,26 @@ app.get('/api/download-progress', (req, res) => {
     });
   }
 });
+// 3. New Endpoint to persist dynamically created categories
+app.post('/api/add-category', (req, res) => {
+  const { category } = req.body;
+  if (!category) return res.status(400).json({ error: 'Category string required' });
 
+  const jsonPath = path.join(__dirname, 'videos.json');
+  if (fs.existsSync(jsonPath)) {
+    try {
+      const db = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
+      if (!db.categories.includes(category)) {
+        db.categories.push(category);
+        fs.writeFileSync(jsonPath, JSON.stringify(db, null, 2), 'utf8');
+      }
+      return res.json({ success: true, categories: db.categories });
+    } catch (e) {
+      return res.status(500).json({ error: 'Failed to rewrite database array file.' });
+    }
+  }
+  res.status(404).json({ error: 'Database resource target structural configuration missing.' });
+});
 const PORT = 5001;
 app.listen(PORT, () => {
   console.log(`Backend cluster live on port ${PORT}`);
