@@ -270,7 +270,7 @@ function App() {
         {/* Dynamic Media Video Card Grid Display */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '20px' }}>
           {savedVideos.filter(v => v.category === activeTab).slice().reverse().map(video => (
-            <div key={video.id} style={{ background: '#1c1c1c', borderRadius: '8px', overflow: 'hidden' }}>
+            <div key={video.id} style={{ background: '#1c1c1c', borderRadius: '8px', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
               {/* Native HTML5 video component streaming from backend public asset folder */}
               <video
                 src={video.videoPath}
@@ -278,41 +278,46 @@ function App() {
                 poster={video.thumbnailPath}
                 style={{ width: '100%', aspectRatio: '16/9', background: '#000' }}
               />
-              {/* PASTE THIS INSTEAD: */}
+
+              {/* Info Container with Text-Only Hover, Keeping Icon Separate */}
               <div
-                style={{ padding: '12px', minHeight: '80px', position: 'relative' }}
+                style={{ padding: '12px', minHeight: '90px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', position: 'relative' }}
                 onMouseEnter={() => setHoveredVideoId(video.id)}
                 onMouseLeave={() => setHoveredVideoId(null)}
               >
-                {hoveredVideoId === video.id && video.note ? (
-                  /* Hover Active View: Shows ONLY the custom note text */
-                  <div style={{ color: '#ffc107', fontSize: '14px', lineHeight: '1.4', fontWeight: '500', fontStyle: 'italic' }}>
-                    📝 {video.note}
-                  </div>
-                ) : (
-                  /* Default Steady State View: Shows Title, Window, and Link Icon */
-                  <>
-                    <h4 style={{ margin: '0 0 8px 0', fontSize: '15px', lineHeight: '1.4', color: '#fff' }}>
-                      {video.title}
-                    </h4>
-
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '12px' }}>
-                      <p style={{ margin: 0, fontSize: '13px', color: '#aaa', fontWeight: '500' }}>
-                        Clip Window: ({formatTimeDisplay(video.clips[0].start)} - {formatTimeDisplay(video.clips[0].end)})
-                      </p>
-
-                      {video.url && (
-                        <a
-                          href={video.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          style={{ textDecoration: 'none', fontSize: '16px', cursor: 'pointer' }}
-                        >
-                          🔺📺
-                        </a>
-                      )}
+                {/* Content Area: Swaps text safely */}
+                <div style={{ flexGrow: 1, marginBottom: '8px' }}>
+                  {hoveredVideoId === video.id && video.note ? (
+                    /* Hover Active View: Shows ONLY the custom note text */
+                    <div style={{ color: '#ffc107', fontSize: '14px', lineHeight: '1.4', fontWeight: '500', fontStyle: 'italic' }}>
+                      📝 {video.note}
                     </div>
-                  </>
+                  ) : (
+                    /* Default Steady State View: Shows Title & Window */
+                    <>
+                      <h4 style={{ margin: '0 0 6px 0', fontSize: '15px', lineHeight: '1.4', color: '#fff' }}>
+                        {video.title}
+                      </h4>
+                      <p style={{ margin: 0, fontSize: '13px', color: '#aaa', fontWeight: '500' }}>
+                        Clip: ({formatTimeDisplay(video.clips[0].start)} - {formatTimeDisplay(video.clips[0].end)})
+                      </p>
+                    </>
+                  )}
+                </div>
+
+                {/* Control Footer: Outside the text toggle layout, always clickable */}
+                {video.url && (
+                  <div style={{ display: 'flex', justifyContent: 'flex-end', position: 'relative', zIndex: 10 }}>
+                    <a
+                      href={video.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ textDecoration: 'none', fontSize: '16px', cursor: 'pointer' }}
+                      title="Open YouTube source"
+                    >
+                      🔺📺
+                    </a>
+                  </div>
                 )}
               </div>
             </div>
