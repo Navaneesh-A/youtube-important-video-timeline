@@ -637,6 +637,22 @@
           "end": "140"
         }
       ]
+    },
+    {
+      "id": 1783849776103,
+      "title": "AI Companies don't want you to know this | VS Code + Continue",
+      "category": "Technology",
+      "note": "visual studio code + ai",
+      "videoPath": "/videos/vid_1783849776103.mp4",
+      "thumbnailPath": "https://i.ytimg.com/vi/13ab5dyOasI/maxresdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=13ab5dyOasI",
+      "clips": [
+        {
+          "label": "Saved Segment",
+          "start": "0",
+          "end": "0"
+        }
+      ]
     }
   ]
 }

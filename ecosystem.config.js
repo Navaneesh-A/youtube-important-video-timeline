@@ -2,7 +2,7 @@
 module.exports = {
   apps: [
     {
-      name: "node-backend",
+      name: "yt-back",
       script: "./backend/server.js",       // Path to your Node.js entry point
       cwd: "./backend",        // Working directory for your backend
       env: {
@@ -11,7 +11,7 @@ module.exports = {
       }
     },
     {
-      name: "react-frontend",
+      name: "yt-front",
       script: "./node_modules/vite/bin/vite.js",       // Windows needs .cmd
       args: "dev",            // This runs your 'vite' command
       cwd: "C:/Users/Admin/Desktop/hmm/youtube-important-video-timeline/frontend", // Ensure this points to the /frontend folder
