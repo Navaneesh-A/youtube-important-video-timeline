@@ -4,7 +4,10 @@
     "Technology",
     "Future Scope",
     "Intern",
-    "leetcode"
+    "leetcode",
+    "Project error",
+    "Inspiration",
+    "game"
   ],
   "videos": [
     {
@@ -668,6 +671,86 @@
           "label": "Saved Segment",
           "start": "962",
           "end": "994"
+        }
+      ]
+    },
+    {
+      "id": 1783864906326,
+      "title": "How to test a local website on your phone",
+      "category": "Project error",
+      "note": "how to run laptop's project in phone , port forwarding amazing",
+      "videoPath": "/videos/vid_1783864906326.mp4",
+      "thumbnailPath": "https://i.ytimg.com/vi/uRYHX4EwYYA/maxresdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=uRYHX4EwYYA",
+      "clips": [
+        {
+          "label": "Saved Segment",
+          "start": "302",
+          "end": "398"
+        }
+      ]
+    },
+    {
+      "id": 1783866464657,
+      "title": "You're Not Doing The Work.",
+      "category": "Inspiration",
+      "note": "Elon on how he created first company, why startups fail",
+      "videoPath": "/videos/vid_1783866464657.mp4",
+      "thumbnailPath": "https://i.ytimg.com/vi/aN_k0m4zMW4/maxresdefault.jpg",
+      "url": "https://youtu.be/aN_k0m4zMW4?si=vf7JyOwQtcmEfq37",
+      "clips": [
+        {
+          "label": "Saved Segment",
+          "start": "205",
+          "end": "396"
+        }
+      ]
+    },
+    {
+      "id": 1783929540256,
+      "title": "Everything You Need To Start Making Games (As A Beginner)",
+      "category": "game",
+      "note": "coding is the backbone for game dev",
+      "videoPath": "/videos/vid_1783929540256.mp4",
+      "thumbnailPath": "https://i.ytimg.com/vi/_eK26atXTds/maxresdefault.jpg",
+      "url": "https://youtu.be/_eK26atXTds?si=gyOs70_ZkWVICXD-",
+      "clips": [
+        {
+          "label": "Saved Segment",
+          "start": "210",
+          "end": "331"
+        }
+      ]
+    },
+    {
+      "id": 1784124904583,
+      "title": "How To Move Apps To Another Drive in Windows 11",
+      "category": "Project error",
+      "note": "",
+      "videoPath": "/videos/vid_1784124904583.mp4",
+      "thumbnailPath": "https://i.ytimg.com/vi/DFmOErtDju8/maxresdefault.jpg",
+      "url": "https://youtu.be/DFmOErtDju8?si=iP9cKM03dPlI3_M3",
+      "clips": [
+        {
+          "label": "Saved Segment",
+          "start": "0",
+          "end": "0"
+        }
+      ]
+    },
+    {
+      "id": 1784207753660,
+      "title": "A Plan Is Not a Strategy",
+      "category": "Inspiration",
+      "note": "",
+      "videoPath": "/videos/vid_1784207753660.mp4",
+      "thumbnailPath": "https://i.ytimg.com/vi/iuYlGRnC7J8/maxresdefault.jpg",
+      "url": "https://www.youtube.com/watch?v=iuYlGRnC7J8&t",
+      "clips": [
+        {
+          "label": "Saved Segment",
+          "start": "0",
+          "end": "0"
         }
       ]
     }

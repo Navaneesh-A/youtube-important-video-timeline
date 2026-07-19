@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import ReactPlayer from 'react-player'
 
+const API_URL = import.meta.env.VITE_API_BASE_URL;
+
 function App() {
   // Input states
   const [url, setUrl] = useState('')

@@ -9,18 +9,33 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
+// export default defineConfig({
+//   plugins: [react()],
+//   server: {
+//     proxy: {
+//       '/api': {
+//         target: 'http://localhost:5001',
+//         changeOrigin: true,
+//       },
+//       '/videos': {
+//         target: 'http://localhost:5001',
+//         changeOrigin: true,
+//       }
+//     }
+//   }
+// })
+// Inside frontend/vite.config.js
 export default defineConfig({
-  plugins: [react()],
   server: {
-    port: 5173,
     proxy: {
+      // 👈 Use this wildcard pattern to proxy ALL backend endpoints seamlessly
       '/api': {
         target: 'http://localhost:5001',
-        changeOrigin: true,
+        changeOrigin: true
       },
       '/videos': {
         target: 'http://localhost:5001',
-        changeOrigin: true,
+        changeOrigin: true
       }
     }
   }

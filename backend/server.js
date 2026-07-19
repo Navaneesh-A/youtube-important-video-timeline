@@ -3,9 +3,19 @@ const { spawn, execFile } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 const app = express();
+const cors = require('cors');
 
+const corsOptions = {
+  origin: '*', // Allows connections from any device on your Wi-Fi network
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
-
+const PORT = process.env.PORT || 5001;
+const HOST = '0.0.0.0'; // Binds to all local network interfaces
 // Serve your downloaded videos and thumbnails statically
 app.use('/videos', express.static(path.join(__dirname, 'public/videos')));
 app.use('/thumbnails', express.static(path.join(__dirname, 'public/thumbnails')));
@@ -126,7 +136,20 @@ app.post('/api/add-category', (req, res) => {
   }
   res.status(404).json({ error: 'Database resource target structural configuration missing.' });
 });
-const PORT = 5001;
-app.listen(PORT, () => {
-  console.log(`Backend cluster live on port ${PORT}`);
+// const runRobustAutomation = async (page, targetUrl) => {
+//   // Pattern: Trigger navigation and DOM element detection simultaneously
+//   await Promise.all([
+//     page.goto(targetUrl, { waitUntil: 'networkidle2', timeout: 30000 }),
+//     page.waitForNavigation({ waitUntil: 'load' })
+//   ]);
+
+//   // Target specific elements securely before pulling metadata metrics
+//   await page.waitForSelector('.video-stream', { visible: true, timeout: 5000 });
+
+//   // Safe to extract data now without execution context drops
+//   const title = await page.evaluate(() => document.title);
+//   return title;
+// };
+app.listen(PORT, HOST, () => {
+  console.log(`Backend cluster live on Http://${HOST}:${PORT}`);
 });

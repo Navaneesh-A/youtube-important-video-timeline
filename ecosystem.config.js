@@ -13,7 +13,7 @@ module.exports = {
     {
       name: "yt-front",
       script: "./node_modules/vite/bin/vite.js",       // Windows needs .cmd
-      args: "dev",            // This runs your 'vite' command
+      args: "dev --host 0.0.0.0",            // This runs your 'vite' command
       cwd: "C:/Users/Admin/Desktop/hmm/youtube-important-video-timeline/frontend", // Ensure this points to the /frontend folder
       env: {
         NODE_ENV: "development",
